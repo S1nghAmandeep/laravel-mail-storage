@@ -5,7 +5,7 @@
         <div class="container">
             <h1>hello World edit</h1>
             <div class="container">
-                <form action="{{ route('admin.projects.update', $project) }}" method="POST" >
+                <form action="{{ route('admin.projects.update', $project) }}" method="POST" enctype="multipart/form-data">
             
                   @csrf
                     @method('PUT')

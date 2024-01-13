@@ -4,29 +4,30 @@
     <section>
         <div class="container">
             <h1>Project Show</h1>
-            <h1>{{ $project->title }}</h1>
             <div class="card" style="width: 18rem;">
                 @if ($project->cover_image)
                 <img src="{{ asset('storage/'. $project->cover_image) }}" class="card-img-top" alt="...">
                 @endif
                 <div class="card-body">
-                    <p>{{ $project->description }}</p>
+                  <h5 class="card-title">{{ $project->title }}</h5>
+                  <p class="card-text">{{ $project->description }}</p>
                 </div>
-              </div>
-            @if ($project->category)
-                <p>{{ $project->category->name }}</p>
-            @endif
-                
-            <ul>
-                @foreach ($project->technologies as $technology)
-                <li class="badge text-bg-success">{{ $technology->name }}</li>
-                @endforeach
-            </ul>
-            <ul class="list-inline">
-                <li class="mb-3">
-                    <a class="btn btn-primary btn-sm" href="{{ route('admin.projects.edit', $project) }}">Edit</a>
-                </li>
-                <li>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                    @if ($project->category)
+                        <h6>Type: {{ $project->category->name }}</h6>
+                    @endif
+                    </li>
+                  <li class="list-group-item">
+                    <ul class="d-flex justify-content-between px-0">
+                        @foreach ($project->technologies as $technology)
+                        <li class="badge text-bg-success">{{ $technology->name }}</li>
+                        @endforeach
+                    </ul>
+                </ul>
+                <div class="card-body d-flex justify-content-between">
+                  <a  class="btn btn-primary btn-sm" href="{{ route('admin.projects.edit', $project) }}" class="card-link">Edit</a>
+                  <a href="#">
                     <button id="myBtn" class="btn btn-sm btn-danger delete">Delete</button>
                     <div id="bgForm" class="bg-form">
                         <div class="d-flex gap-3 delete-form">
@@ -39,10 +40,9 @@
                             </form>
                         <button id="noBtn" class="btn btn-primary btn-lg">No</button>
                     </div>
-                </li>
-            </ul>
-           
-        
+                  </a>
+                </div>
+            </div>
         </div>
     </section>
 @endsection
