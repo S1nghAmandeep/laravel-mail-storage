@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <section>
-        <div class="container">
-            <h1>Project Show</h1>
+    <section class="vh-100">
+        <div class="container d-flex flex-column align-items-center gap-3">
+            <h1 class="mt-2">Project Show</h1>
             <div class="card" style="width: 18rem;">
                 @if ($project->cover_image)
                 <img src="{{ asset('storage/'. $project->cover_image) }}" class="card-img-top" alt="...">
@@ -13,13 +13,13 @@
                   <p class="card-text">{{ $project->description }}</p>
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">
                     @if ($project->category)
+                    <li class="list-group-item">
                         <h6>Type: {{ $project->category->name }}</h6>
-                    @endif
                     </li>
+                    @endif
                   <li class="list-group-item">
-                    <ul class="d-flex justify-content-between px-0">
+                    <ul class="d-flex flex-column flex-wrap gap-2 justify-content-between px-0">
                         @foreach ($project->technologies as $technology)
                         <li class="badge text-bg-success">{{ $technology->name }}</li>
                         @endforeach
