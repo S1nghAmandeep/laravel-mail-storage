@@ -41,22 +41,29 @@
                     <textarea class="form-control" name="description" id="description" rows="3" placeholder="Descrivi il comic">{{ $project->description }}
                     </textarea>
                   </div>
+
+                  <div class="mb-3">
+                    <label for="cover_image" class="form-label">Add file</label>
+                    <input class="form-control" name="cover_image" type="file" id="cover_image">
+                  </div>
             
-                  <div class="">
+            
+                  <div class="mb-3">
                       <button type="submit" class="btn btn-primary">Save</button>
                   </div>
             
                 </form>
-              </div>
+            </div>
+            @if ($errors->any())
+            <div class="alert alert-danger mt-3">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
         </div>
-        @if ($errors->any())
-        <div class="alert alert-danger mt-3">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+
     </section>
 @endsection

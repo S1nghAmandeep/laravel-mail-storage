@@ -6,7 +6,7 @@
             <h1>Create Project</h1>
         </div>
         <div class="container">
-            <form action="{{ route('admin.projects.store') }}" method="POST" >
+            <form action="{{ route('admin.projects.store') }}" method="POST" enctype="multipart/form-data">
         
               @csrf
         
@@ -41,15 +41,19 @@
                 <label for="description" class="form-label">Descrizione</label>
                 <textarea class="form-control" name="description" id="description" rows="3" placeholder="Descrivi il comic">{{old('description')}}</textarea>
               </div>
+
+              <div class="mb-3">
+                <label for="cover_image" class="form-label">Default file input example</label>
+                <input class="form-control" name="cover_image" type="file" id="cover_image">
+              </div>
         
-              <div class="">
+              <div class="mb-3">
                 <input type="submit" class="btn btn-primary" value="create">
               </div>
         
             </form>
-          </div>
-          @if ($errors->any())
-              <div class="alert alert-danger mt-3">
+            @if ($errors->any())
+              <div class="alert alert-danger">
                   <ul>
                       @foreach ($errors->all() as $error)
                           <li>{{ $error }}</li>
@@ -57,5 +61,6 @@
                   </ul>
               </div>
           @endif
+          </div>
     </section>
 @endsection

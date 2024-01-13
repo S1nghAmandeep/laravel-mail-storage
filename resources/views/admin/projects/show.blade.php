@@ -5,7 +5,14 @@
         <div class="container">
             <h1>Project Show</h1>
             <h1>{{ $project->title }}</h1>
-            <p>{{ $project->description }}</p>
+            <div class="card" style="width: 18rem;">
+                @if ($project->cover_image)
+                <img src="{{ asset('storage/'. $project->cover_image) }}" class="card-img-top" alt="...">
+                @endif
+                <div class="card-body">
+                    <p>{{ $project->description }}</p>
+                </div>
+              </div>
             @if ($project->category)
                 <p>{{ $project->category->name }}</p>
             @endif

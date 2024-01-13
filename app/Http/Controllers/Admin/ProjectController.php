@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Project;
 use App\Models\Technology;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -41,10 +42,18 @@ class ProjectController extends Controller
             'title' => 'required|max:50|string|',
             'link_project' => 'required|string',
             'description' => 'nullable|string',
-            'technologies' => 'exists:technologies,id'
+            'technologies' => 'exists:technologies,id',
+            'cover_image' => 'nullable|max:2048|file'
         ]);
 
         $data = $request->all();
+
+        if ($request->has('cover_image')) {
+            $img_path = Storage::put('upload', $request->cover_image);
+
+            $data['cover_image'] = $img_path;
+        }
+
         $new_project = Project::create($data);
 
         if ($request->has('technologies')) {
@@ -80,14 +89,28 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
+
+        // dd($request->all());
         $request->validate([
             'title' => 'required|max:50|string',
             'link_project' => 'required|string',
             'description' => 'nullable|string',
-            'technologies' => 'exists:technologies,id'
+            'technologies' => 'exists:technologies,id',
+            'cover_image' => 'nullable|max:2048|file'
         ]);
 
         $data = $request->all();
+
+        if ($request->has('cover_image')) {
+            $img_path = Storage::put('upload', $request->cover_image);
+
+            $data['cover_image'] = $img_path;
+
+            if ($project->cover_image) {
+                Storage::delete($project->cover_image);
+            }
+        }
+
         $project->update($data);
 
         if ($request->has('technologies')) {
