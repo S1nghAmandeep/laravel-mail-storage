@@ -41,6 +41,7 @@ class NewContact extends Mailable
     {
         return new Content(
             view: 'emails.new-contact',
+            markdown: 'emails.new-contact',
         );
     }
 
